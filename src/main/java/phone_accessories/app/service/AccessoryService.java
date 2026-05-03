@@ -2,6 +2,8 @@ package phone_accessories.app.service;
 
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import phone_accessories.app.entity.Accessory;
 import phone_accessories.app.entity.Brand;
 
@@ -16,6 +18,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AccessoryService {
 
+    @Autowired
+    private AccessoryRepository accessoryRepository;
     private final AccessoryRepository accessoryRepository;
     private final CategoryService categoryService;
     private final BrandService brandService;
@@ -40,10 +44,16 @@ public class AccessoryService {
         existing.setBrand(brand);
 
         return accessoryRepository.save(existing);
+    // Create
+    public Accessory createAccessory(Accessory accessory) {
+        return accessoryRepository.save(accessory);
     }
 
     public void delete(Long id) {
         Accessory existing = getById(id);
         accessoryRepository.delete(existing);
+    // View all
+    public List<Accessory> getAllAccessories() {
+        return accessoryRepository.findAll();
     }
 }
