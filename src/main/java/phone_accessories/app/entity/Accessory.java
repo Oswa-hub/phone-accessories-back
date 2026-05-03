@@ -7,12 +7,19 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Category {
+public class Accessory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-    private String description;
+    private Double price;
+    private Integer stock;
+
+    @ManyToOne
+    private Category category;
+
+    @ManyToOne
+    private Brand brand;
 }
