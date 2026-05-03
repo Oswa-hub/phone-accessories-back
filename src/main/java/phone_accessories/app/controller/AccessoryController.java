@@ -22,7 +22,10 @@ public class AccessoryController {
 
     // GET
     @GetMapping
-    public List<Accessory> getAllAccessories() {
-        return accessoryService.getAllAccessories();
+    public List<Accessory> getAccessories(
+            @RequestParam(required = false) Long categoryId,
+            @RequestParam(required = false) Long brandId) {
+
+        return accessoryService.filterAccessories(categoryId, brandId);
     }
 }

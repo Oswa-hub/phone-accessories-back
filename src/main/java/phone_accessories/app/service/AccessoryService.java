@@ -22,4 +22,22 @@ public class AccessoryService {
     public List<Accessory> getAllAccessories() {
         return accessoryRepository.findAll();
     }
+
+    // Filter accessories
+    public List<Accessory> filterAccessories(Long categoryId, Long brandId) {
+
+        if (categoryId != null && brandId != null) {
+            return accessoryRepository.findByCategoryIdAndBrandId(categoryId, brandId);
+        }
+
+        if (categoryId != null) {
+            return accessoryRepository.findByCategoryId(categoryId);
+        }
+
+        if (brandId != null) {
+            return accessoryRepository.findByBrandId(brandId);
+        }
+
+        return accessoryRepository.findAll();
+    }
 }
