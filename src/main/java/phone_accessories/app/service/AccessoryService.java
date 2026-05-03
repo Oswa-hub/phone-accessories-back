@@ -18,12 +18,7 @@ public class AccessoryService {
         return accessoryRepository.save(accessory);
     }
 
-    // View all
-    public List<Accessory> getAllAccessories() {
-        return accessoryRepository.findAll();
-    }
-
-    // Filter accessories
+    // Filter + View
     public List<Accessory> filterAccessories(Long categoryId, Long brandId) {
 
         if (categoryId != null && brandId != null) {

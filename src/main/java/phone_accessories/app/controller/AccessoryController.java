@@ -20,7 +20,7 @@ public class AccessoryController {
         return accessoryService.createAccessory(accessory);
     }
 
-    // GET
+    // GET (filter + view all)
     @GetMapping
     public List<Accessory> getAccessories(
             @RequestParam(required = false) Long categoryId,
@@ -28,4 +28,4 @@ public class AccessoryController {
 
         return accessoryService.filterAccessories(categoryId, brandId);
     }
-}
+}git add .
