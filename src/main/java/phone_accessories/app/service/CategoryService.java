@@ -22,4 +22,20 @@ public class CategoryService {
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
     }
+
+    public Category updateCategory(Long id, Category newCategory) {
+        Category category = categoryRepository.findById(id).orElse(null);
+
+        if (category != null) {
+            category.setName(newCategory.getName());
+            category.setDescription(newCategory.getDescription());
+            return categoryRepository.save(category);
+        }
+
+        return null;
+    }
+
+    public void deleteCategory(Long id) {
+        categoryRepository.deleteById(id);
+    }
 }
