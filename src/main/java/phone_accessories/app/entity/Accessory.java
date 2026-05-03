@@ -1,19 +1,15 @@
 package phone_accessories.app.entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
-@Table(name = "accessory")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
+@Table(name = "accessory")
 public class Accessory {
 
     @Id
@@ -34,5 +30,4 @@ public class Accessory {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;
-
 }
