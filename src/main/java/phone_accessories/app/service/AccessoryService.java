@@ -35,4 +35,9 @@ public class AccessoryService {
 
         return accessoryRepository.findAll();
     }
+
+    // GET BY ID
+    public Accessory getById(Long id) {
+        return accessoryRepository.findById(id).orElse(null);
+    }
 }

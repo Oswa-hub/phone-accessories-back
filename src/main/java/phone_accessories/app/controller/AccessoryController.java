@@ -14,7 +14,7 @@ public class AccessoryController {
     @Autowired
     private AccessoryService accessoryService;
 
-    // POST
+    // POST/create
     @PostMapping
     public Accessory createAccessory(@RequestBody Accessory accessory) {
         return accessoryService.createAccessory(accessory);
@@ -28,4 +28,10 @@ public class AccessoryController {
 
         return accessoryService.filterAccessories(categoryId, brandId);
     }
-}git add .
+
+    // GET BY ID
+    @GetMapping("/{id}")
+    public Accessory getAccessoryById(@PathVariable Long id) {
+        return accessoryService.getById(id);
+    }
+}
