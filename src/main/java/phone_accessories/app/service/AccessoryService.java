@@ -37,15 +37,28 @@ public class AccessoryService {
         return accessoryRepository.save(accessory);
     }
 
+    // Filter + View
+    public List<Accessory> filterAccessories(Long categoryId, Long brandId) {
+
+        if (categoryId != null && brandId != null) {
+            return accessoryRepository.findByCategoryIdAndBrandId(categoryId, brandId);
+        }
+
+        if (categoryId != null) {
+            return accessoryRepository.findByCategoryId(categoryId);
+        }
+
+        if (brandId != null) {
+            return accessoryRepository.findByBrandId(brandId);
+        }
+
+        return accessoryRepository.findAll();
+    }
+
     // DELETE
     public void delete(Long id) {
         Accessory existing = getById(id);
         accessoryRepository.delete(existing);
-    }
-
-    // GET ALL
-    public List<Accessory> getAllAccessories() {
-        return accessoryRepository.findAll();
     }
 
     // GET BY ID (needed but missing in your code)
