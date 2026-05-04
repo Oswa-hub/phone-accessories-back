@@ -1,6 +1,7 @@
 package phone_accessories.app.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import phone_accessories.app.entity.Accessory;
 import phone_accessories.app.service.AccessoryService;
@@ -9,15 +10,35 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/accessories")
+@RequiredArgsConstructor
 public class AccessoryController {
 
-    @Autowired
-    private AccessoryService accessoryService;
+    private final AccessoryService accessoryService;
+
+    // DELETE /api/accessories/{id}
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        accessoryService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
     // POST/create
     @PostMapping
-    public Accessory createAccessory(@RequestBody Accessory accessory) {
-        return accessoryService.createAccessory(accessory);
+    public ResponseEntity<Accessory> createAccessory(@RequestBody Accessory accessory) {
+        return ResponseEntity.ok(accessoryService.createAccessory(accessory));
+    }
+
+    // PUT
+    @PutMapping("/{id}")
+    public ResponseEntity<Accessory> update(
+            @PathVariable Long id,
+            @RequestBody Accessory accessory,
+            @RequestParam Long categoryId,
+            @RequestParam Long brandId) {
+
+        return ResponseEntity.ok(
+                accessoryService.update(id, accessory, categoryId, brandId)
+        );
     }
 
     // GET (filter + view all)

@@ -26,7 +26,12 @@ public class CategoryController {
         return categoryService.getAllCategories();
     }
 
-    // PUT /api/categories/{id}
+    // GET by id
+    @GetMapping("/{id}")
+    public Category getCategory(@PathVariable Long id) {
+        return categoryService.getById(id);
+    }
+
     @PutMapping("/{id}")
     public Category updateCategory(@PathVariable Long id, @RequestBody Category category) {
         return categoryService.updateCategory(id, category);

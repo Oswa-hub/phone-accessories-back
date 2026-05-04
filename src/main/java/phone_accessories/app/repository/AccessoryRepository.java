@@ -1,7 +1,9 @@
 package phone_accessories.app.repository;
 
+
 import phone_accessories.app.entity.Accessory;
 import org.springframework.data.jpa.repository.JpaRepository;
+import phone_accessories.app.entity.Accessory;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,3 +17,4 @@ public interface AccessoryRepository extends JpaRepository<Accessory, Long> {
 
     List<Accessory> findByCategoryIdAndBrandId(Long categoryId, Long brandId);
 }
+
