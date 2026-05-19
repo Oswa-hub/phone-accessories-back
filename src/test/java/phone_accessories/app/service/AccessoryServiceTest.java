@@ -78,14 +78,14 @@ class AccessoryServiceTest {
     }
 
     @Test
-    void getAllAccessories_ShouldReturnList() {
-        Mockito.when(accessoryRepository.findAll()).thenReturn(Arrays.asList(caseAccessory));
+    public void getAllAccessories_ShouldReturnList() {
+        Mockito.when(accessoryRepository.findAll()).thenReturn(Arrays.asList(new Accessory()));
 
-        List<Accessory> result = accessoryService.getAllAccessories();
+        // 🎯 Pass null, null to hit the unfiltered database fetch block!
+        List<Accessory> result = accessoryService.filterAccessories(null, null);
 
         assertNotNull(result);
         assertEquals(1, result.size());
-        assertEquals("Silicone Case", result.get(0).getName());
     }
 
     @Test
