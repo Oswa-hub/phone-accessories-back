@@ -2,7 +2,8 @@ package phone_accessories.app.entity;
 
 
 import jakarta.persistence.*;
-        import lombok.*;
+import lombok.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "brand")
@@ -10,7 +11,7 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Brand {
+public class Brand implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
