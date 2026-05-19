@@ -2,6 +2,7 @@ package phone_accessories.app.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -10,7 +11,7 @@ import lombok.*;
 @Builder
 @Entity
 @Table(name = "accessory")
-public class Accessory {
+public class Accessory implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +24,11 @@ public class Accessory {
 
     private Integer stock;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;
 }
