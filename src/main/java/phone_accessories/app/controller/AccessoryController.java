@@ -22,7 +22,7 @@ public class AccessoryController {
         return ResponseEntity.noContent().build();
     }
 
-    // POST
+    // POST/create
     @PostMapping
     public ResponseEntity<Accessory> createAccessory(@RequestBody Accessory accessory) {
         return ResponseEntity.ok(accessoryService.createAccessory(accessory));
@@ -41,9 +41,18 @@ public class AccessoryController {
         );
     }
 
-    // GET
+    // GET (filter + view all)
     @GetMapping
-    public List<Accessory> getAllAccessories() {
-        return accessoryService.getAllAccessories();
+    public List<Accessory> getAccessories(
+            @RequestParam(required = false) Long categoryId,
+            @RequestParam(required = false) Long brandId) {
+
+        return accessoryService.filterAccessories(categoryId, brandId);
+    }
+
+    // GET BY ID
+    @GetMapping("/{id}")
+    public Accessory getAccessoryById(@PathVariable Long id) {
+        return accessoryService.getById(id);
     }
 }

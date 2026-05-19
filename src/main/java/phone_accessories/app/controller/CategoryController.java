@@ -14,7 +14,7 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    // POST (Create)
+    // POST /api/categories
     @PostMapping
     public Category createCategory(@RequestBody Category category) {
         return categoryService.saveCategory(category);
@@ -37,6 +37,7 @@ public class CategoryController {
         return categoryService.updateCategory(id, category);
     }
 
+    // DELETE /api/categories/{id}
     @DeleteMapping("/{id}")
     public void deleteCategory(@PathVariable Long id) {
         categoryService.deleteCategory(id);
