@@ -23,7 +23,6 @@ public class SecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
 
-    // Constructor injection for your custom service
     public SecurityConfig(CustomUserDetailsService customUserDetailsService) {
         this.customUserDetailsService = customUserDetailsService;
     }
@@ -36,10 +35,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(cors -> cors.configure(http)) // 👈 Ensure your CorsConfig bean is linked!
+                .cors(cors -> cors.configure(http))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/login", "/auth/login").permitAll() // 👈 Open both variations just in case
+                        .requestMatchers("/api/auth/login", "/auth/login").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(basic -> {});
@@ -50,10 +49,9 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager() {
-        // Pass your custom service directly into the constructor here! 🎯
+
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider(customUserDetailsService);
 
-        // Set the password encoder engine
         provider.setPasswordEncoder(passwordEncoder());
 
         return new ProviderManager(provider);

@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "admin_users") // 👈 Forces Hibernate to use the matching table name
+@Table(name = "admin_users")
 @Getter
 @Setter
 public class AdminUser {

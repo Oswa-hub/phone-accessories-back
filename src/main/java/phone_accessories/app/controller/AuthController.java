@@ -26,7 +26,6 @@ public class AuthController {
         try {
             UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
 
-            // Compares the entered plain-text password with the BCrypt string stored inside Postgres
             if (passwordEncoder.matches(request.getPassword(), userDetails.getPassword())) {
                 return ResponseEntity.ok(Map.of(
                         "username", userDetails.getUsername(),
@@ -35,7 +34,7 @@ public class AuthController {
                 ));
             }
         } catch (Exception e) {
-            // Drop down to error return state on user mismatch
+
         }
         return ResponseEntity.status(401).body("Invalid username or password");
     }

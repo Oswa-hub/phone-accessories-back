@@ -19,14 +19,14 @@ import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest // 👈 Tells Spring Boot to enable @Autowired injection for tests
+@SpringBootTest
 class FullApplicationFlowTest {
 
     private WebDriver driver;
     private WebDriverWait wait;
 
-    @Autowired // 👈 Now this will resolve cleanly
-    private AdminUserRepository adminUserRepository; // 👈 Updated to match your exact repository name
+    @Autowired
+    private AdminUserRepository adminUserRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -35,7 +35,7 @@ class FullApplicationFlowTest {
     void setUp() {
         adminUserRepository.deleteAll(); // clear old data
 
-        AdminUser admin = new AdminUser(); // 👈 Updated to match your exact entity name
+        AdminUser admin = new AdminUser();
         admin.setUsername("admin");
         admin.setPassword(passwordEncoder.encode("admin123"));
         admin.setRole("ROLE_ADMIN");
@@ -49,13 +49,13 @@ class FullApplicationFlowTest {
         // Configures explicit waits for your Angular app elements (Increased to 10s for smooth routing)
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        // 1. Opens your running Angular Application URL
+        // Opens your running Angular Application URL
         driver.get("http://localhost:4200");
     }
 
     @Test
     void testCreateBrand_FullUIFlow() {
-        // --- 1. LOGIN STEP (Fixes the timeout issue by actually logging in first!) ---
+        // LOGIN STEP
         WebElement usernameInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//input[@type='text' or @name='username' or @placeholder='Username']")
         ));
@@ -72,7 +72,7 @@ class FullApplicationFlowTest {
         loginButton.click();
 
 
-        // --- 2. NAVIGATION AND INTERACTION STEP ---
+        //NAVIGATION AND INTERACTION STEP
         // Locate and click the Brand management navigation link using your exact routerLink
         WebElement brandLink = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//a[@routerlink='/brands' or contains(text(), 'Brands')]")

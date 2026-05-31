@@ -13,7 +13,7 @@ public class DatabaseSeeder {
     @Bean
     CommandLineRunner initDatabase(AdminUserRepository adminUserRepository, PasswordEncoder passwordEncoder) {
         return args -> {
-            // 👇 ADD THIS LINE TEMPORARILY TO WIPE CORRUPTED RECORDS
+
             adminUserRepository.deleteAll();
 
             if (adminUserRepository.findByUsername("admin").isEmpty()) {
